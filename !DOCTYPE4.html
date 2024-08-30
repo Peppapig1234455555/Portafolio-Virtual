@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego: Adivina el Número</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        #game {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        input[type="number"] {
+            padding: 5px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #message {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="game">
+        <h1>Adivina el Número</h1>
+        <p>He pensado en un número entre 1 y 100. ¿Puedes adivinarlo?</p>
+        <input type="number" id="guess" min="1" max="100" placeholder="Introduce tu número">
+        <button onclick="checkGuess()">Adivinar</button>
+        <div id="message"></div>
+    </div>
+
+    <script>
+        // Generar un número aleatorio entre 1 y 100
+        const targetNumber = Math.floor(Math.random() * 100) + 1;
+
+        // Función para comprobar la adivinanza del usuario
+        function checkGuess() {
+            const guess = Number(document.getElementById('guess').value);
+            const message = document.getElementById('message');
+
+            if (isNaN(guess) || guess < 1 || guess > 100) {
+                message.textContent = "Por favor, introduce un número entre 1 y 100.";
+                message.style.color = "red";
+                return;
+            }
+
+            if (guess === targetNumber) {
+                message.textContent = "¡Felicidades! ¡Adivinaste el número!";
+                message.style.color = "green";
+            } else if (guess < targetNumber) {
+                message.textContent = "El número es mayor. Intenta de nuevo.";
+                message.style.color = "orange";
+            } else {
+                message.textContent = "El número es menor. Intenta de nuevo.";
+                message.style.color = "orange";
+            }
+        }
+    </script>
+</body>
+</html>
